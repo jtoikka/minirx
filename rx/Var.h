@@ -7,14 +7,24 @@ namespace rx {
 
 class Signal {
 public:
-  static uint8_t nextSignalId() {
+  static Signal& instance() {
+    static Signal _instance;
+    return _instance;
+  }
+
+  Signal(Signal const&) = delete;
+  void operator=(Signal const&) = delete;
+
+  uint8_t nextSignalId() {
+    if (signalId == 0) {
+      signalId = 1;
+    }
     return signalId++;
   }
 private:
-  static uint8_t signalId;
+  Signal() { }
+  uint8_t signalId = 1;
 };
-
-uint8_t Signal::signalId = 1;
 
 template <typename T>
 class VarNode : public Outputting<T> {
@@ -28,7 +38,7 @@ public:
   void set(T value) {
     if (!(this->_value == value)) {
       this->_value = value;
-      this->forwardSignal(Signal::nextSignalId());
+      this->forwardSignal(Signal::instance().nextSignalId());
     }
   }
 private:
