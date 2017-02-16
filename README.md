@@ -4,13 +4,15 @@ Minirx is a small library for reactive programming with C++14.
 
 ## Usage
 
+Drop `rx.h` and the `rx` folder into your project.
+
 ```cpp
 
 #include "rx.h"
 
 VarT<int> foo = Var(1);
 
-Var<float> bar = Var(2.0f);
+VarT<float> bar = Var(2.0f);
 
 Rx<float> baz = bar.map([] (int value) {
   return value * 2.5f;
@@ -31,3 +33,13 @@ bar.set(4.0f);
 std::cout << fooBaz.now() << std::endl; // 20.0f
 
 ```
+
+See `test/tests.cpp` for more examples.
+
+## Run tests
+
+```sh
+$ ./run_tests.sh
+```
+
+Requires [meson](https://github.com/mesonbuild/meson) build tool.
