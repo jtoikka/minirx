@@ -78,13 +78,6 @@ public:
     isCreated = true;
   }
 
-  ReturnType now() const {
-    if (!isCreated) {
-      throw new RxException("Rx has not been initialized");
-    }
-    return this->_node->now();
-  }
-
 private:
   bool isCreated = false;
 };

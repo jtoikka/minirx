@@ -50,10 +50,6 @@ class VarT : public Reactive<T> {
 public:
   VarT(T value) : Reactive<T>(std::make_shared<VarNode<T>>(value)) { }
 
-  T now() const {
-    return this->_node->now();
-  }
-
   void set(T value) {
     std::dynamic_pointer_cast<VarNode<T>>(this->_node)->set(value);
   }

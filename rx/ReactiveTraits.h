@@ -131,6 +131,12 @@ public:
     Observer<T>(func, *this);
   }
 
+  T now() const {
+    return this->_node->now();
+  }
+
+  virtual ~Reactive() { }
+
 protected:
   std::shared_ptr<Outputting<T>> _node;
 };
